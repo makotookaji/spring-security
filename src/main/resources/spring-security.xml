@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<sec:http auto-config="true" use-expressions="true">
+		<sec:intercept-url pattern="/user**" access="hasRole('ROLE_USER')" />
+		<sec:intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/sys**" access="hasRole('ROLE_SYS')" />
+
+		<sec:intercept-url pattern="/login" access="permitAll" />
+		<sec:intercept-url pattern="/logout" access="permitAll" />
+		<sec:intercept-url pattern="/autherror" access="permitAll" />
+		<sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+	</sec:http>
+
+	<sec:authentication-manager>
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="user" password="user" authorities="ROLE_USER" />
+				<sec:user name="admin" password="admin" authorities="ROLE_ADMIN" />
+				<sec:user name="sys" password="sys" authorities="ROLE_SYS" />
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+</beans>
