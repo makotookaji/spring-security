@@ -5,13 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>${title}</title>
 </head>
 <body>
-Sample Page
-<br />
-<br />
-<h1>Title : ${title}</h1>	
-<h1>Message : ${message}</h1>	
+<h3>Title : ${title}</h3>
+<h3>Message : ${message}</h3>
+<a href="/welcome">back to welecome page</a>
 </body>
 </html>
