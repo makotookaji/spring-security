@@ -21,7 +21,7 @@ public class AccountUserDetailsService implements UserDetailsService {
 		try {
 			Account account = accountResolverService.findUserByUserName(username);
 			// (2)
-			return new SampleUserDetails(account);
+			return new AccountUserDetails(account);
 		} catch (Exception e) {
 			logger.error("Unkonwn Error", e);
 			throw new UsernameNotFoundException("user not found", e);

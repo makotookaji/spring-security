@@ -10,6 +10,8 @@
 <body>
 	<h3>Welcome!!</h3>
 	<br>
+	<a href="/mypage">Here is Mypage!!</a>
+	<br>
 	<sec:authorize access="hasAnyRole('USER','ADMIN')">
 		<a href="/user">Here is User Page!!</a>
 	</sec:authorize>
@@ -17,7 +19,7 @@
 	<sec:authorize access="hasRole('ADMIN')">
 		<a href="/admin">Here is Admin Page!!</a>
 	</sec:authorize>
-
+	
 	<c:url var="logoutUrl" value="/logout" />
 	<form action="${logoutUrl}" method="post">
 		<input type="submit" value="Log out" /> <input type="hidden"

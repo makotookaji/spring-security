@@ -21,20 +21,14 @@
 		<sec:access-denied-handler error-page="/403error" />
 	</sec:http>
 
-
 	<sec:authentication-manager>
 		<sec:authentication-provider
 			user-service-ref="accountUserDetailsService">
 		</sec:authentication-provider>
 	</sec:authentication-manager>
-	<!-- <sec:user-service id="inMemoryDaoImpl"> <sec:user name="user" password="user" 
-		authorities="ROLE_USER" /> <sec:user name="admin" password="admin" authorities="ROLE_ADMIN" 
-		/> <sec:user name="hoge" password="hoge" authorities="ROLE_ADMIN,ROLE_USER" 
-		/> </sec:user-service> -->
-	<!-- <bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider"> 
-		<property name="userDetailsService" ref="accountUserDetailsService" /> </bean> -->
+
 	<bean id="accountUserDetailsService" class="com.security.service.AccountUserDetailsService">
-		<property name="accountResolverService" ref="accountResolverService"/>
+		<property name="accountResolverService" ref="accountResolverService" />
 	</bean>
 	<bean id="accountResolverService" class="com.security.service.AccountResolverService" />
 </beans>

@@ -5,11 +5,11 @@ import org.springframework.security.core.userdetails.User;
 import com.security.model.Account;
 
 @SuppressWarnings("serial")
-public class SampleUserDetails extends User {
+public class AccountUserDetails extends User {
 
 	private Account account;
 
-	public SampleUserDetails(Account account) {
+	public AccountUserDetails(Account account) {
 		super(account.getUsername(), account.getPassword(), account.getAuthorities());
 		this.account = account;
 	}

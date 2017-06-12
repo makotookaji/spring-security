@@ -2,9 +2,15 @@ package com.security.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.security.model.Account;
+import com.security.service.AccountUserDetails;
 
 @Controller
 public class LoginController {
@@ -27,6 +33,29 @@ public class LoginController {
 		model.addObject("title", "Spring Security Welcome");
 		model.addObject("message", "This is Welcome page!");
 		model.setViewName("welcome");
+		return model;
+	}
+
+	@RequestMapping(value = "/mypage")
+	public ModelAndView mypage() {
+		logger.debug("mypage");
+		ModelAndView model = new ModelAndView();
+		model.setViewName("mypage");
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth.getPrincipal() instanceof AccountUserDetails) {
+			AccountUserDetails accountUser = AccountUserDetails.class.cast(auth.getPrincipal());
+			Account account = accountUser.getAccount();
+			model.addObject("username", account.getUsername());
+			model.addObject("realname", account.getFirstName() + " " + account.getLastName());
+			model.addObject("authorities", account.getAuthoritiesString());
+			model.addObject("address", account.getCountry() + " , " + account.getCity());
+			model.addObject("gender", account.getGender());
+		} else {
+			UserDetails user = UserDetails.class.cast(auth.getPrincipal());
+			model.addObject("username", user.getUsername());
+			model.addObject("authorities", user.getAuthorities().toArray());
+		}
 		return model;
 	}
 

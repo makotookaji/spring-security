@@ -1,8 +1,11 @@
 package com.security.model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.util.StringUtils;
 
 public class Account {
 
@@ -18,14 +21,12 @@ public class Account {
 
 	private String country;
 
-	private String prefecture;
-
 	private String city;
 
 	private List<GrantedAuthority> authorities;
 
 	public Account(String username, String password, String firstName, String lastName, String gender, String country,
-			String prefecture, String city, List<GrantedAuthority> authorities) {
+			String city, List<GrantedAuthority> authorities) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -33,7 +34,6 @@ public class Account {
 		this.lastName = lastName;
 		this.gender = gender;
 		this.country = country;
-		this.prefecture = prefecture;
 		this.city = city;
 		this.authorities = authorities;
 	}
@@ -86,14 +86,6 @@ public class Account {
 		this.country = country;
 	}
 
-	public String getPrefecture() {
-		return prefecture;
-	}
-
-	public void setPrefecture(String prefecture) {
-		this.prefecture = prefecture;
-	}
-
 	public String getCity() {
 		return city;
 	}
@@ -109,10 +101,21 @@ public class Account {
 	public void setAuthorities(List<GrantedAuthority> authorities) {
 		this.authorities = authorities;
 	}
+	
+	public List<String> getAuthoritiesString() {
+		List<String> ret = new ArrayList<String>();
+		Iterator<GrantedAuthority> iterator = this.authorities.iterator();
+		for (; iterator.hasNext();) {
+			GrantedAuthority auth = iterator.next();
+			ret.add(auth.getAuthority());
+		}
+		return ret;
+	}
 
 	@Override
 	public String toString() {
 		return "Account [username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName="
-				+ lastName + "]";
+				+ lastName + ", gender=" + gender + ", country=" + country + ", city=" + city + ", authorities="
+				+ StringUtils.toStringArray(this.getAuthoritiesString()) + "]";
 	}
 }
