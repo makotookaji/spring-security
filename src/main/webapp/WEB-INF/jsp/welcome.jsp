@@ -8,7 +8,7 @@
 <title>Welcome</title>
 </head>
 <body>
-	<h3>Hello!!</h3>
+	<h3>Welcome page!!</h3>
 	<br>
 	<a href="/mypage">Here is Mypage!!</a>
 	<br>
